@@ -1,0 +1,92 @@
+													/* Catalog Page*/
+
+												/* Header for Catalog */
+.navbar {
+    border-bottom: 1px solid #e1e1e1;
+}
+navbar-brand{
+	margin:auto;
+}
+navbar-nav{
+	margin-left:0.5px;
+}
+
+.logo {
+    height: 100px !important;
+}
+
+.btn-outline-secondary {
+    margin-left: 10px;
+}
+
+.cart-btn i {
+    font-size: 18px;
+}
+													/* End of Header for Catalog */
+
+
+												/* Sort/Filter Section for Catalog */
+.sort-btn, .filter-btn {
+    cursor: pointer;
+}
+
+.list-group-item.bg-light {
+    background-color: #f8f9fa !important;
+    font-weight: bold;
+}
+													/* END of Sort/Filter Section for Catalog */
+												
+												
+												/* Products Section for Catalog */
+
+
+											
+.product-card {
+    position: relative;
+    overflow: hidden;
+}
+
+
+.add-to-cart-btn {
+    width: 100%;
+}
+											
+											
+										/* End Products Section for Catalog */
+											
+											
+											
+											/* Cart Page */
+											
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+.btn-danger {
+    color: #fff;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.btn-success {
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    color: #fff;
+}
+											
+											/* End of Cart Page*/
+											
