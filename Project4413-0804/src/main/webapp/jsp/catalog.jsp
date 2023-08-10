@@ -56,9 +56,22 @@ try {
 <div class="col-lg-2">
     <div class="list-group">
         <h5 class="list-group-item bg-light">Sort</h5>
-        <button class="list-group-item list-group-item-action sort-btn" onclick="sortProducts('asc')">Sort by Price (Low to High)</button>
+     <!--     <button class="list-group-item list-group-item-action sort-btn" onclick="sortProducts('asc')">Sort by Price (Low to High)</button>
         <button class="list-group-item list-group-item-action sort-btn" onclick="sortProducts('desc')">Sort by Price (High to Low)</button>
         <button class="list-group-item list-group-item-action sort-btn" onclick="sortProducts('name')">Sort by Name</button>
+        -->
+        <a class="list-group-item list-group-item-action sort-btn" href="${initParam.param1}?action=sortL_H"> <span class="label"
+					style="margin-left: 15px;">Sort by Price (Low to High)</span>
+				</a>
+				
+		<a class="list-group-item list-group-item-action sort-btn" href="${initParam.param1}?action=sortH_L"> <span class="label"
+					style="margin-left: 15px;">Sort by Price (High to Low)</span>
+				</a>
+				
+		<a class="list-group-item list-group-item-action sort-btn" href="${initParam.param1}?action=sortName"> <span class="label"
+					style="margin-left: 15px;">Sort by Name</span>
+				</a>		
+				
         <h5 class="list-group-item bg-light">Filter by Category </h5>
         
         
@@ -93,26 +106,38 @@ try {
 
 <div id="products-container" class="container mt-4">
     <div class="row">
-        <% while (rs.next()) { %>
-            <div class="col-md-3 mb-4">
-            <div class="card product-card" data-price="<%= rs.getString("price") %>" data-category="<%= rs.getString("category") %>" data-brand="<%= rs.getString("brand") %>">
-		
-                    <img src="<%= rs.getString("image") %>" class="card-img-top" alt="<%= rs.getString("name") %>">
+     
+     
+     
+     
+     
+     
+     
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+           
+	 <c:forEach items="${productList}" var="item">
+	 
+	 <div class="col-md-3 mb-4">
+            <div class="card product-card" data-price=" ${item.price}" data-category=" ${item.caregory}" data-brand="${item.brand}">
+		  
+		  <img src=" ${item.image} " class="card-img-top" alt="${item.name} ">
                     <div class="card-body">
-                        <h5 class="card-title"><%= rs.getString("name") %></h5>
-                        <p class="card-text">$<%= rs.getString("price") %></p>
+                    	    <h5 class="card-title">${item.name}</h5>
+                        <p class="card-text">${item.price}</p>
                         <div class="product-description">
-                            <%= rs.getString("description") %>
+                            ${item.description}
                         </div>
-<button class="btn btn-primary add-to-cart-btn" onclick="addToCart(this)" data-name="<%= rs.getString("name") %>" data-price="<%= rs.getFloat("price") %>" data-quantity="1">Add to Cart</button>
+<button class="btn btn-primary add-to-cart-btn" onclick="addToCart(this)" data-name="${item.price}" data-price="${item.price} data-quantity="1">Add to Cart</button>
                      </div>
                 </div>
-               
-            </div>
+             </div>
+	 
+	 </c:forEach> 
+            
             <% if ((rs.getRow()) % 4 == 0 && !rs.isLast()) { %>
                 </div>
                 <div class="row">
-            <% } %>
+            
         <% } %>
     </div>
     </div>

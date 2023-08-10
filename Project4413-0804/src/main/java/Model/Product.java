@@ -8,7 +8,12 @@ private String name;
 private Long price;
 private String img;
 private String desc;
+private String brand;
 
+
+public String getBrand() {
+	return brand;
+}
 
 
 public Long getId() {
@@ -38,6 +43,10 @@ public String getImg() {
 
 public void setId(Long id) {
 	this.id = id;
+}
+
+public void setBrand(String brand) {
+	this.brand = brand;
 }
 
 public void setCategory(String category) {
