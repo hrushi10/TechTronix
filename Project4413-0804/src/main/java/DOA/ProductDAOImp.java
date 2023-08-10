@@ -15,15 +15,15 @@ public class ProductDAOImp implements ProductDAO{
 
 	static {
 		try {
-			Class.forName("org.sqlite.JDBC");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException ex) {
 		}
 	}
 
 	// complete this method
 	private Connection getConnection() throws SQLException {
-		
-		 return DriverManager.getConnection("jdbc:sqlite:C:\\Users\\patel\\Desktop\\Summer 2023\\EECS 4413\\Labs\\4413 lab6\\Books.db ");
+		return DriverManager.getConnection("jdbc:mysql://eecs4413.ceik1relpviq.us-east-2.rds.amazonaws.com:3306/project4413", "admin", "mysql4413");
+
 	}
 
 	private void closeConnection(Connection connection) {
@@ -68,12 +68,12 @@ Connection connection = null;
 				String image = resultSet.getString("image");
 				String category = resultSet.getString("category");
 				String brand = resultSet.getString("brand");
-				String desc = resultSet.getString("description");
+				String description = resultSet.getString("description");
 
 				product.setId(id);
-				product.setImg(image);
+				product.setImage(image);
 				product.setCategory(category);
-				product.setDesc(desc);
+				product.setDescription(description);
 				product.setName(name);
 				product.setPrice(price);
 				product.setBrand(brand);
@@ -94,7 +94,7 @@ Connection connection = null;
 	public List<Product> sortProductsL_H()  {
 		
 		List<Product> result = new ArrayList<Product>();
-		String sql = "select * from products order by price asc;";
+		String sql = "select * from products order by price;";
 Connection connection = null;
 		
 		try {
@@ -122,12 +122,12 @@ Connection connection = null;
 				String image = resultSet.getString("image");
 				String category = resultSet.getString("category");
 				String brand = resultSet.getString("brand");
-				String desc = resultSet.getString("description");
+				String description = resultSet.getString("description");
 
 				product.setId(id);
-				product.setImg(image);
+				product.setImage(image);
 				product.setCategory(category);
-				product.setDesc(desc);
+				product.setDescription(description);
 				product.setName(name);
 				product.setPrice(price);
 				product.setBrand(brand);
@@ -176,12 +176,12 @@ Connection connection = null;
 				String image = resultSet.getString("image");
 				String category = resultSet.getString("category");
 				String brand = resultSet.getString("brand");
-				String desc = resultSet.getString("description");
+				String description = resultSet.getString("description");
 
 				product.setId(id);
-				product.setImg(image);
+				product.setImage(image);
 				product.setCategory(category);
-				product.setDesc(desc);
+				product.setDescription(description);
 				product.setName(name);
 				product.setPrice(price);
 				product.setBrand(brand);
@@ -235,12 +235,12 @@ Connection connection = null;
 					String image = resultSet.getString("image");
 					String category = resultSet.getString("category");
 					String brand = resultSet.getString("brand");
-					String desc = resultSet.getString("description");
+					String description = resultSet.getString("description");
 
 					product.setId(id);
-					product.setImg(image);
+					product.setImage(image);
 					product.setCategory(category);
-					product.setDesc(desc);
+					product.setDescription(description);
 					product.setName(name);
 					product.setPrice(price);
 					product.setBrand(brand);
@@ -331,12 +331,12 @@ Connection connection = null;
 				String image = resultSet.getString("image");
 				String category = resultSet.getString("category");
 				String brand = resultSet.getString("brand");
-				String desc = resultSet.getString("description");
+				String description = resultSet.getString("description");
 
 				product.setId(id);
-				product.setImg(image);
+				product.setImage(image);
 				product.setCategory(category);
-				product.setDesc(desc);
+				product.setDescription(description);
 				product.setName(name);
 				product.setPrice(price);
 				product.setBrand(brand);
@@ -403,12 +403,12 @@ public List<Product> findProductsByBrand(String br) {
 			String image = resultSet.getString("image");
 			String category = resultSet.getString("category");
 			String brand = resultSet.getString("brand");
-			String desc = resultSet.getString("description");
+			String description = resultSet.getString("description");
 
 			product.setId(id);
-			product.setImg(image);
+			product.setImage(image);
 			product.setCategory(category);
-			product.setDesc(desc);
+			product.setDescription(description);
 			product.setName(name);
 			product.setPrice(price);
 			product.setBrand(brand);

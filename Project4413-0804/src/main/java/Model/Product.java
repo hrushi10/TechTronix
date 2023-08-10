@@ -6,8 +6,8 @@ private Long id;
 private String category;
 private String name;
 private Long price;
-private String img;
-private String desc;
+private String image;
+private String description;
 private String brand;
 
 
@@ -33,12 +33,12 @@ public Long getPrice() {
 	return price;
 }
 
-public String getDesc() {
-	return desc;
+public String getDescription() {
+	return description;
 }
 
-public String getImg() {
-	return img;
+public String getImage() {
+	return image;
 }
 
 public void setId(Long id) {
@@ -61,12 +61,12 @@ public void setPrice(Long price) {
 	this.price = price;
 }
 
-public void setImg(String img) {
-	this.img = img;
+public void setImage(String img) {
+	this.image = img;
 }
 
-public void setDesc(String desc) {
-	this.desc = desc;
+public void setDescription(String desc) {
+	this.description = desc;
 }
 
 

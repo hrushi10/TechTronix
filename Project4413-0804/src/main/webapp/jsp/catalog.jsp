@@ -1,5 +1,6 @@
 <%@ page import="java.sql.*" %>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 ResultSet rs = null; 
 Connection con = null;
@@ -60,15 +61,15 @@ try {
         <button class="list-group-item list-group-item-action sort-btn" onclick="sortProducts('desc')">Sort by Price (High to Low)</button>
         <button class="list-group-item list-group-item-action sort-btn" onclick="sortProducts('name')">Sort by Name</button>
         -->
-        <a class="list-group-item list-group-item-action sort-btn" href="${initParam.param1}?action=sortL_H"> <span class="label"
+        <a class="list-group-item list-group-item-action sort-btn" href="./${initParam.param1}?action=sortL_H"> <span class="label"
 					style="margin-left: 15px;">Sort by Price (Low to High)</span>
 				</a>
 				
-		<a class="list-group-item list-group-item-action sort-btn" href="${initParam.param1}?action=sortH_L"> <span class="label"
+		<a class="list-group-item list-group-item-action sort-btn" href="./${initParam.param1}?action=sortH_L"> <span class="label"
 					style="margin-left: 15px;">Sort by Price (High to Low)</span>
 				</a>
 				
-		<a class="list-group-item list-group-item-action sort-btn" href="${initParam.param1}?action=sortName"> <span class="label"
+		<a class="list-group-item list-group-item-action sort-btn" href="./${initParam.param1}?action=sortName"> <span class="label"
 					style="margin-left: 15px;">Sort by Name</span>
 				</a>		
 				
@@ -106,28 +107,24 @@ try {
 
 <div id="products-container" class="container mt-4">
     <div class="row">
-     
-     
-     
-     
-     
-     
-     
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-           
-	 <c:forEach items="${productList}" var="item">
+    
+             
+	 <c:forEach items="${productList}" var='item'>
+	
 	 
-	 <div class="col-md-3 mb-4">
-            <div class="card product-card" data-price=" ${item.price}" data-category=" ${item.caregory}" data-brand="${item.brand}">
+	
+             
+             	<div class="col-md-3 mb-4">
+            <div class="card product-card" data-price=" ${item.price}" data-category=" ${item.category}" data-brand="${item.brand}">
 		  
-		  <img src=" ${item.image} " class="card-img-top" alt="${item.name} ">
+		<img src="${item.image}" class="card-img-top" alt="${item.name} ">
                     <div class="card-body">
                     	    <h5 class="card-title">${item.name}</h5>
                         <p class="card-text">${item.price}</p>
+                        
                         <div class="product-description">
                             ${item.description}
                         </div>
-                        
 <button class="btn btn-primary add-to-cart-btn" onclick="addToCart(this)" data-name="${item.price}" data-price="${item.price} data-quantity="1">Add to Cart</button>
                      </div>
                 </div>

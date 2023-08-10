@@ -43,6 +43,8 @@ public class ProductController extends HttpServlet {
 		List<String> categoryList =  productDao.findAllCategories();
 		ServletContext context =  config.getServletContext();
 		context.setAttribute("categoryList", categoryList);
+		List<Product> productList = productDao.findAllProducts();
+		context.setAttribute("productList", productList);
 
 	}
     
@@ -58,15 +60,15 @@ public class ProductController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String base = "";
-		//String url = base + "calatog.jsp";
+		String base = "/jsp/";
+		String url = base + "catalog.jsp";
 		String action = request.getParameter("action");
 		String category = request.getParameter("category");
 		String brand = request.getParameter("brand");
 	//	String keyWord = request.getParameter("keyWord");
 		if (action != null) {
 			switch (action) {
-			case "allBooks":
+			case "allproducts":
 				findAllProducts(request, response);
 			//	url = base + "listOfBooks.jsp";
 				break;
@@ -74,15 +76,15 @@ public class ProductController extends HttpServlet {
 				findProductsByCategory(request, response, category);
 				//url = base + "category.jsp?category=" + category;
 				break;
-			case "sortName":
+			case "sortL_H":
 				sortProductsL_H(request, response);
 		//		url = base + "searchResult.jsp";
 				break;
-			case "sortL_H":
+			case "sortH_L":
 				sortProductsH_L(request, response);
 			//	url = base + "searchResult.jsp";
 				break;
-			case "sortH_L":
+			case "allCategories":
 				findAllCategories(request, response);
 	//			url = base + "searchResult.jsp";
 				break;
@@ -93,7 +95,7 @@ public class ProductController extends HttpServlet {
 
 			}
 		}
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/catalog.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(url);
 		requestDispatcher.forward(request, response);
 	}
 
