@@ -127,6 +127,7 @@ try {
                         <div class="product-description">
                             ${item.description}
                         </div>
+                        
 <button class="btn btn-primary add-to-cart-btn" onclick="addToCart(this)" data-name="${item.price}" data-price="${item.price} data-quantity="1">Add to Cart</button>
                      </div>
                 </div>
