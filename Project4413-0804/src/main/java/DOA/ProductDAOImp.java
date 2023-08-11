@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+
 import java.util.ArrayList;
 import java.util.List;
 import Model.Product;
@@ -56,30 +56,8 @@ Connection connection = null;
 			PreparedStatement statement = connection.prepareStatement(sql);
 			ResultSet resultSet =  statement.executeQuery();
 					
-			while (resultSet.next()) {
-				
-				Product product = new Product();
-				
-				
-				// populate book and author beans with needed info, and then set author to book
-				Long id = resultSet.getLong("id");
-				String name = resultSet.getString("name");
-				Long price = resultSet.getLong("price");
-				String image = resultSet.getString("image");
-				String category = resultSet.getString("category");
-				String brand = resultSet.getString("brand");
-				String description = resultSet.getString("description");
-
-				product.setId(id);
-				product.setImage(image);
-				product.setCategory(category);
-				product.setDescription(description);
-				product.setName(name);
-				product.setPrice(price);
-				product.setBrand(brand);
-													
-				result.add(product);
-			}
+			result = makeList(resultSet);
+			
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		} finally {
@@ -110,30 +88,8 @@ Connection connection = null;
 			PreparedStatement statement = connection.prepareStatement(sql);
 			ResultSet resultSet =  statement.executeQuery();
 					
-			while (resultSet.next()) {
-				
-				Product product = new Product();
-				
-				
-				// populate book and author beans with needed info, and then set author to book
-				Long id = resultSet.getLong("id");
-				String name = resultSet.getString("name");
-				Long price = resultSet.getLong("price");
-				String image = resultSet.getString("image");
-				String category = resultSet.getString("category");
-				String brand = resultSet.getString("brand");
-				String description = resultSet.getString("description");
-
-				product.setId(id);
-				product.setImage(image);
-				product.setCategory(category);
-				product.setDescription(description);
-				product.setName(name);
-				product.setPrice(price);
-				product.setBrand(brand);
-													
-				result.add(product);
-			}
+			result = makeList(resultSet);
+			
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		} finally {
@@ -164,30 +120,8 @@ Connection connection = null;
 			PreparedStatement statement = connection.prepareStatement(sql);
 			ResultSet resultSet =  statement.executeQuery();
 					
-			while (resultSet.next()) {
-				
-				Product product = new Product();
-				
-				
-				// populate book and author beans with needed info, and then set author to book
-				Long id = resultSet.getLong("id");
-				String name = resultSet.getString("name");
-				Long price = resultSet.getLong("price");
-				String image = resultSet.getString("image");
-				String category = resultSet.getString("category");
-				String brand = resultSet.getString("brand");
-				String description = resultSet.getString("description");
-
-				product.setId(id);
-				product.setImage(image);
-				product.setCategory(category);
-				product.setDescription(description);
-				product.setName(name);
-				product.setPrice(price);
-				product.setBrand(brand);
-													
-				result.add(product);
-			}
+			result = makeList(resultSet);
+			
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		} finally {
@@ -223,30 +157,8 @@ Connection connection = null;
 				PreparedStatement statement = connection.prepareStatement(sql);
 				ResultSet resultSet =  statement.executeQuery();
 						
-				while (resultSet.next()) {
-					
-					Product product = new Product();
-					
-					
-					// populate book and author beans with needed info, and then set author to book
-					Long id = resultSet.getLong("id");
-					String name = resultSet.getString("name");
-					Long price = resultSet.getLong("price");
-					String image = resultSet.getString("image");
-					String category = resultSet.getString("category");
-					String brand = resultSet.getString("brand");
-					String description = resultSet.getString("description");
-
-					product.setId(id);
-					product.setImage(image);
-					product.setCategory(category);
-					product.setDescription(description);
-					product.setName(name);
-					product.setPrice(price);
-					product.setBrand(brand);
-														
-					result.add(product);
-				}
+				result = makeList(resultSet);
+				
 			} catch (SQLException ex) {
 				ex.printStackTrace();
 			} finally {
@@ -290,7 +202,7 @@ Connection connection = null;
 			closeConnection(connection);
 		}
 		
-		return null;
+		return result;
 	}
 
 	
@@ -302,7 +214,7 @@ Connection connection = null;
 
 		List<Product> result = new ArrayList<Product>();
 		
-		String sql = "select* from products where category ="+cat+" ;";
+		String sql = "select* from products where category like '"+cat+"' ;";
 		
 		Connection connection = null;
 		
@@ -319,30 +231,8 @@ Connection connection = null;
 			PreparedStatement statement = connection.prepareStatement(sql);
 			ResultSet resultSet =  statement.executeQuery();
 					
-			while (resultSet.next()) {
-				
-				Product product = new Product();
-				
-				
-				// populate book and author beans with needed info, and then set author to book
-				Long id = resultSet.getLong("id");
-				String name = resultSet.getString("name");
-				Long price = resultSet.getLong("price");
-				String image = resultSet.getString("image");
-				String category = resultSet.getString("category");
-				String brand = resultSet.getString("brand");
-				String description = resultSet.getString("description");
-
-				product.setId(id);
-				product.setImage(image);
-				product.setCategory(category);
-				product.setDescription(description);
-				product.setName(name);
-				product.setPrice(price);
-				product.setBrand(brand);
-													
-				result.add(product);
-			}
+			result = makeList(resultSet);
+			
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		} finally {
@@ -361,7 +251,7 @@ Connection connection = null;
 	}
 
 	@Override
-	public void delete(Long pid) {
+	public void delete(int pid) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -374,7 +264,7 @@ public List<Product> findProductsByBrand(String br) {
 
 	List<Product> result = new ArrayList<Product>();
 	
-	String sql = "select * from products where brand = "+br+";";
+	String sql = "select * from products where brand like '"+br+"';";
 	
 	Connection connection = null;
 	
@@ -390,20 +280,73 @@ public List<Product> findProductsByBrand(String br) {
 		
 		PreparedStatement statement = connection.prepareStatement(sql);
 		ResultSet resultSet =  statement.executeQuery();
+	
+		result = makeList(resultSet);
+		
+	} catch (SQLException ex) {
+		ex.printStackTrace();
+	} finally {
+		closeConnection(connection);
+	}
+	
+	
+	return result;
+}
+
+@Override
+public List<String> findAllBrands() {
+	// TODO Auto-generated method stub
+	List<String> result = new ArrayList<String>();
+	
+	String sql = "select distinct(brand) from products ;";
+	
+	Connection connection = null;
+	
+	try {
+		connection = getConnection();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	try {
+		connection = getConnection();
+		
+		PreparedStatement statement = connection.prepareStatement(sql);
+		ResultSet resultSet =  statement.executeQuery();
 				
 		while (resultSet.next()) {
+															
+			result.add(resultSet.getString("brand"));
+		}
+	} catch (SQLException ex) {
+		ex.printStackTrace();
+	} finally {
+		closeConnection(connection);
+	}
+	
+	return result;
+}
+
+
+private List<Product> makeList(ResultSet rs){
+	
+	List<Product> result = new ArrayList<Product>();
+	
+	try {
+		while (rs.next()) {
 			
 			Product product = new Product();
 			
 			
 			// populate book and author beans with needed info, and then set author to book
-			Long id = resultSet.getLong("id");
-			String name = resultSet.getString("name");
-			Long price = resultSet.getLong("price");
-			String image = resultSet.getString("image");
-			String category = resultSet.getString("category");
-			String brand = resultSet.getString("brand");
-			String description = resultSet.getString("description");
+			int id = rs.getInt("id");
+			String name = rs.getString("name");
+			double price = rs.getDouble("price");
+			String image = rs.getString("image");
+			String category = rs.getString("category");
+			String brand = rs.getString("brand");
+			String description = rs.getString("description");
 
 			product.setId(id);
 			product.setImage(image);
@@ -415,17 +358,13 @@ public List<Product> findProductsByBrand(String br) {
 												
 			result.add(product);
 		}
-	} catch (SQLException ex) {
-		ex.printStackTrace();
-	} finally {
-		closeConnection(connection);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
-	
-	
 	return result;
+	
 }
-
-
 
 
 }

@@ -2,10 +2,10 @@ package Model;
 
 public class Product {
 	
-private Long id;
+private int id;
 private String category;
 private String name;
-private Long price;
+private double  price;
 private String image;
 private String description;
 private String brand;
@@ -16,7 +16,7 @@ public String getBrand() {
 }
 
 
-public Long getId() {
+public int getId() {
 	return id;
 }
 
@@ -29,7 +29,7 @@ public String getName() {
 	return name;
 }
 
-public Long getPrice() {
+public double  getPrice() {
 	return price;
 }
 
@@ -41,7 +41,7 @@ public String getImage() {
 	return image;
 }
 
-public void setId(Long id) {
+public void setId(int id) {
 	this.id = id;
 }
 
@@ -57,7 +57,7 @@ public void setName(String name) {
 	this.name = name;
 }
 
-public void setPrice(Long price) {
+public void setPrice(double price) {
 	this.price = price;
 }
 

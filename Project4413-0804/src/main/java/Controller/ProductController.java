@@ -41,11 +41,13 @@ public class ProductController extends HttpServlet {
 		ProductDAOImp productDao = new ProductDAOImp();
 		// calling DAO method to retrieve category List from Database, for left column display
 		List<String> categoryList =  productDao.findAllCategories();
+		List<String> brandList =  productDao.findAllBrands();
 		ServletContext context =  config.getServletContext();
 		context.setAttribute("categoryList", categoryList);
 		List<Product> productList = productDao.findAllProducts();
 		context.setAttribute("productList", productList);
-
+		context.setAttribute("categoryList", categoryList);
+		context.setAttribute("brandList", brandList);
 	}
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -65,6 +67,7 @@ public class ProductController extends HttpServlet {
 		String action = request.getParameter("action");
 		String category = request.getParameter("category");
 		String brand = request.getParameter("brand");
+		
 	//	String keyWord = request.getParameter("keyWord");
 		if (action != null) {
 			switch (action) {
@@ -89,17 +92,20 @@ public class ProductController extends HttpServlet {
 	//			url = base + "searchResult.jsp";
 				break;
 			case "brand":
-				findAllBrandategories(request, response,brand);
+				findByBrand(request, response,brand);
 			//	url = base + "searchResult.jsp";
 				
 
 			}
+			
+			
 		}
+			
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(url);
 		requestDispatcher.forward(request, response);
 	}
 
-	private void findAllBrandategories(HttpServletRequest request, HttpServletResponse response, String brand) {
+	private void findByBrand(HttpServletRequest request, HttpServletResponse response, String brand) {
 		// TODO Auto-generated method stub
 		try {
 			// calling DAO method to retrieve a list of all books 

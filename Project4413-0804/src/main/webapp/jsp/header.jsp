@@ -1,6 +1,6 @@
 
 <head>	
-<link rel="stylesheet" href="../css/style.css" type="text/css" />
+<link rel="stylesheet" href="./css/style.css" type="text/css" />
 <script src="../js/sort.js"></script>
 <script src="../js/filter.js"></script>
 <script src="../js/cart.js"></script>
@@ -24,7 +24,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid justify-content-center">
             <a class="navbar-brand mx-auto" href="catalog.jsp">
-                <img src="../images/logo.png" alt="Logo" class="logo ml-4">
+                <img src="./images/logo.png" alt="Logo" class="logo">
             </a>
             <div class="navbar-nav">
                 <div class="dropdown">
