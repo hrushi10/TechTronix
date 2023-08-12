@@ -72,7 +72,7 @@
 
 <div id="products-container" class="container mt-4">
     <div class="row">
-    <% List<Product> cartItems = new ArrayList<Product>(); %>
+    
              
 	 <c:forEach items="${productList}" var='item'>
 	    
@@ -87,7 +87,7 @@
                         <div class="product-description">
                             ${item.description}
                         </div>
-<button class="btn btn-primary add-to-cart-btn" onclick="addToCart(${item})" data-name="${item.price}" data-price="${item.price} data-quantity="1">Add to Cart</button>
+<button class="btn btn-primary add-to-cart-btn" onclick="addToCart(this)" data-name="${item.name}" data-price="${item.price}" data-quantity="1">Add to Cart</button>
                      </div>
                 </div>
              </div>

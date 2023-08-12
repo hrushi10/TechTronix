@@ -28,7 +28,7 @@
         </table>
         <div class="text-right">
             <h3>Total: $</h3>
-            <a href="checkout.jsp" class="btn btn-success">Proceed to Checkout</a>
+            <a href="./jsp/checkout.jsp" class="btn btn-success">Proceed to Checkout</a>
         </div>
     </div>
 </body>

@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="./css/style.css" type="text/css" />
 <script src="../js/sort.js"></script>
 <script src="../js/filter.js"></script>
-<script src="../js/cart.js"></script>
+<script src="./js/cart.js"></script>
 
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
@@ -16,14 +16,11 @@
     
 </head>
 	
-		
-						
-						
 						
 						<!-- Header for Catalog Page -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid justify-content-center">
-            <a class="navbar-brand mx-auto" href="catalog.jsp">
+            <a class="navbar-brand mx-auto" href="./products">
                 <img src="./images/logo.png" alt="Logo" class="logo">
             </a>
             <div class="navbar-nav">
@@ -32,15 +29,18 @@
                         Account
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="registration.jsp">Login</a>
+                        <a class="dropdown-item" href="./${initParam.param1}?action=reg">Login</a>
                         <a class="dropdown-item" href="#">Logout</a>
                     </div>
                 </div> &nbsp;
-       <a href="cart.jsp"><button class="btn btn-outline-secondary cart-btn">
+       <a href="./${initParam.param1}?action=cart"><button class="btn btn-outline-secondary cart-btn" >
+                 <!--  href="./jsp/cart.jsp"><button class="btn btn-outline-secondary cart-btn" -->
                     <i class="fas fa-shopping-cart"></i>
                 </button> </a>
             </div>
         </div>
     </nav>
+    
+    
 	
 	<!-- End of Header -->   

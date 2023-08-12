@@ -4,7 +4,7 @@ public class User {
 	
 private String username;
 private String password;
-private String emial;
+private String email;
 private Boolean admin=false;
 
 public String getUsername() {
@@ -16,7 +16,7 @@ public String getPassword() {
 }
 
 public String getEmial() {
-	return emial;
+	return email;
 }
 
 public Boolean getAdmin() {
@@ -31,8 +31,8 @@ public void setPassword(String password) {
 	this.password = password;
 }
 
-public void setEmial(String emial) {
-	this.emial = emial;
+public void setEmial(String email) {
+	this.email = email;
 }
 
 public void setAdmin(Boolean admin) {

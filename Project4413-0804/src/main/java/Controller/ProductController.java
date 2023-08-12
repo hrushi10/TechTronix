@@ -67,43 +67,100 @@ public class ProductController extends HttpServlet {
 		String action = request.getParameter("action");
 		String category = request.getParameter("category");
 		String brand = request.getParameter("brand");
-		
+		RequestDispatcher requestDispatcher ;
+
 	//	String keyWord = request.getParameter("keyWord");
 		if (action != null) {
 			switch (action) {
 			case "allproducts":
 				findAllProducts(request, response);
 			//	url = base + "listOfBooks.jsp";
+				//response.sendRedirect("./jsp/catalog.jsp");
+				 requestDispatcher = request.getRequestDispatcher(url);
+
+				requestDispatcher.forward(request, response);
 				break;
+				
 			case "category":
 				findProductsByCategory(request, response, category);
 				//url = base + "category.jsp?category=" + category;
+				//response.sendRedirect("./jsp/catalog.jsp");
+				 requestDispatcher = request.getRequestDispatcher(url);
+
+				requestDispatcher.forward(request, response);
 				break;
 			case "sortL_H":
 				sortProductsL_H(request, response);
 		//		url = base + "searchResult.jsp";
+				//response.sendRedirect("./jsp/catalog.jsp");
+				 requestDispatcher = request.getRequestDispatcher(url);
+
+				requestDispatcher.forward(request, response);
 				break;
 			case "sortH_L":
 				sortProductsH_L(request, response);
 			//	url = base + "searchResult.jsp";
+				//response.sendRedirect("./jsp/catalog.jsp");
+				 requestDispatcher = request.getRequestDispatcher(url);
+
+				requestDispatcher.forward(request, response);
 				break;
 			case "allCategories":
 				findAllCategories(request, response);
 	//			url = base + "searchResult.jsp";
+				//response.sendRedirect("./jsp/catalog.jsp");
+				 requestDispatcher = request.getRequestDispatcher(url);
+				requestDispatcher.forward(request, response);
 				break;
 			case "brand":
 				findByBrand(request, response,brand);
 			//	url = base + "searchResult.jsp";
-				
+				 requestDispatcher = request.getRequestDispatcher(url);
+				//response.sendRedirect("./jsp/catalog.jsp");
+				requestDispatcher.forward(request, response);
+				break;
+			case "cart":
+				requestDispatcher = request.getRequestDispatcher("./jsp/cart.jsp");
+				//response.sendRedirect("./jsp/catalog.jsp");
+				requestDispatcher.forward(request, response);
+				//gotoCart(request, response);
+				break;
+			case "reg":
+				requestDispatcher = request.getRequestDispatcher("./jsp/registration.jsp");
+				//response.sendRedirect("./jsp/catalog.jsp");
+				requestDispatcher.forward(request, response);
+				//gotoReg(request, response);
+				break;
 
-			}
 			
 			
 		}
+		}else {
+			 requestDispatcher = request.getRequestDispatcher(url);
+
+				requestDispatcher.forward(request, response);
+				}
+	
 			
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher(url);
-		requestDispatcher.forward(request, response);
+//		RequestDispatcher requestDispatcher = request.getRequestDispatcher(url);
+//		//response.sendRedirect("./jsp/catalog.jsp");
+//		requestDispatcher.forward(request, response);
 	}
+
+//	private void gotoReg(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		// TODO Auto-generated method stub
+//		String url = "./jsp/registration.jsp";
+//		RequestDispatcher requestDispatcher = request.getRequestDispatcher(url);
+//		requestDispatcher.forward(request, response);
+//		return;
+//	}
+//
+//	private void gotoCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		
+//		String url = "./jsp/cart.jsp";
+//		response.sendRedirect(url);
+//		
+//	}
 
 	private void findByBrand(HttpServletRequest request, HttpServletResponse response, String brand) {
 		// TODO Auto-generated method stub
