@@ -1,6 +1,8 @@
 package Controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +16,7 @@ import Model.User;
 /**
  * Servlet implementation class UserController
  */
-@WebServlet("/jsp/UserController")
+@WebServlet("/UserController")
 public class UserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -49,26 +51,31 @@ public class UserController extends HttpServlet {
 		String email = request.getParameter("loginEmail");
 		User existingUser = userDAO.getUserByEmail(email);
 
+		RequestDispatcher requestDispatcher;
+
 		if (existingUser == null) {
 			// User doesn't exist, redirect to registration page
-			response.sendRedirect("signup.jsp");
-			
+			requestDispatcher = request.getRequestDispatcher("./jsp/signup.jsp");
+			requestDispatcher.forward(request, response);
+
 		} else {
 			// User exists, redirect to login page
-	        String password = request.getParameter("loginPassword");
+			String password = request.getParameter("loginPassword");
 
-	        User user = userDAO.getUserByEmail(email);
-	        String userName = user.getName();
+			User user = userDAO.getUserByEmail(email);
+			String userName = user.getName();
 
-	        if (user != null && user.getPassword().equals(password)) {
-	            // Successful login, set user in session and redirect
-	            request.getSession().setAttribute("user", user);
-	            response.sendRedirect("catalog.jsp");
-	            System.out.println("user logged in");
-	        } else {
-	            // Failed login, redirect back to login page with error message
-	            request.getRequestDispatcher("login.jsp").forward(request, response);
-	        }
+			if (user != null && user.getPassword().equals(password)) {
+				// Successful login, set user in session and redirect
+				request.getSession().setAttribute("user", user.getName());
+				requestDispatcher = request.getRequestDispatcher("./jsp/catalog.jsp");
+				requestDispatcher.forward(request, response);
+				System.out.println("user logged in");
+			} else {
+				// Failed login, redirect back to login page with error message
+				requestDispatcher = request.getRequestDispatcher("./jsp/login.jsp");
+				requestDispatcher.forward(request, response);
+			}
 		}
 	}
 }

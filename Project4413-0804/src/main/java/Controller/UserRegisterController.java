@@ -1,6 +1,8 @@
 package Controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +15,7 @@ import Model.User;
 /**
  * Servlet implementation class UserRegisterController
  */
-@WebServlet("/jsp/UserRegisterController")
+@WebServlet("/UserRegisterController")
 public class UserRegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -41,6 +43,7 @@ public class UserRegisterController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		UserDAOImpl userDAO = new UserDAOImpl();
+		RequestDispatcher requestDispatcher;
 
 		String email = request.getParameter("registerEmail");
 		String name = request.getParameter("registerName");
@@ -50,7 +53,8 @@ public class UserRegisterController extends HttpServlet {
         userDAO.createUser(newUser);
 
         // Redirect to login page after successful registration
-        response.sendRedirect("login.jsp");
+        requestDispatcher = request.getRequestDispatcher("./jsp/login.jsp");
+		requestDispatcher.forward(request, response);
 	}
 
 }

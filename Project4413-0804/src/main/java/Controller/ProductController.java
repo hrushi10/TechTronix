@@ -128,12 +128,19 @@ public class ProductController extends HttpServlet {
 				requestDispatcher.forward(request, response);
 				
 				break;
+			case "logout":
+				requestDispatcher = request.getRequestDispatcher("./UserLogoutController");
+			
+				requestDispatcher.forward(request, response);
+				
+				break;
 			case "checkout":
 				requestDispatcher = request.getRequestDispatcher("./jsp/checkout.jsp");
 				
 				requestDispatcher.forward(request, response);
 				
 				break;
+				
 			
 			
 		}
