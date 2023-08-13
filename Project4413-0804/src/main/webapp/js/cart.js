@@ -131,4 +131,16 @@ function submitOrder(event) {
     });
 }
 
+function checkAddress(checkbox){
+	var div = document.getElementById('bill_Addr');
+	
+    if (!checkbox.checked)
+    {
+        div.style.display ='block';
+       
+    }else{
+    	 div.style.display ='none';
+    }
+}
+
 document.addEventListener('DOMContentLoaded', renderCart);

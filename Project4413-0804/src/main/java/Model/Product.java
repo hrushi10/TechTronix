@@ -68,6 +68,6 @@ public void setImage(String img) {
 public void setDescription(String desc) {
 	this.description = desc;
 }
-
-
 }
+
+

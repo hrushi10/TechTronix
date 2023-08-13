@@ -54,7 +54,6 @@ public class ProductController extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		doPost(request, response);
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -69,103 +68,89 @@ public class ProductController extends HttpServlet {
 		String brand = request.getParameter("brand");
 		RequestDispatcher requestDispatcher ;
 
-	//	String keyWord = request.getParameter("keyWord");
-		if (action != null) {
+	
+		if (action != null) { // check where to go using the action parameter
 			switch (action) {
 			case "allproducts":
 				findAllProducts(request, response);
-			//	url = base + "listOfBooks.jsp";
-				//response.sendRedirect("./jsp/catalog.jsp");
-				 requestDispatcher = request.getRequestDispatcher(url);
-
-				requestDispatcher.forward(request, response);
+		
 				break;
 				
 			case "category":
 				findProductsByCategory(request, response, category);
-				//url = base + "category.jsp?category=" + category;
-				//response.sendRedirect("./jsp/catalog.jsp");
+				
 				 requestDispatcher = request.getRequestDispatcher(url);
 
 				requestDispatcher.forward(request, response);
 				break;
 			case "sortL_H":
+				
 				sortProductsL_H(request, response);
-		//		url = base + "searchResult.jsp";
-				//response.sendRedirect("./jsp/catalog.jsp");
 				 requestDispatcher = request.getRequestDispatcher(url);
 
 				requestDispatcher.forward(request, response);
 				break;
 			case "sortH_L":
 				sortProductsH_L(request, response);
-			//	url = base + "searchResult.jsp";
-				//response.sendRedirect("./jsp/catalog.jsp");
+			
 				 requestDispatcher = request.getRequestDispatcher(url);
 
 				requestDispatcher.forward(request, response);
 				break;
 			case "allCategories":
 				findAllCategories(request, response);
-	//			url = base + "searchResult.jsp";
-				//response.sendRedirect("./jsp/catalog.jsp");
+	
 				 requestDispatcher = request.getRequestDispatcher(url);
 				requestDispatcher.forward(request, response);
 				break;
 			case "brand":
 				findByBrand(request, response,brand);
-			//	url = base + "searchResult.jsp";
+			
 				 requestDispatcher = request.getRequestDispatcher(url);
-				//response.sendRedirect("./jsp/catalog.jsp");
+			
 				requestDispatcher.forward(request, response);
 				break;
 			case "cart":
 				requestDispatcher = request.getRequestDispatcher("./jsp/cart.jsp");
-				//response.sendRedirect("./jsp/catalog.jsp");
+			
 				requestDispatcher.forward(request, response);
-				//gotoCart(request, response);
+				
 				break;
-			case "reg":
-				requestDispatcher = request.getRequestDispatcher("./jsp/registration.jsp");
-				//response.sendRedirect("./jsp/catalog.jsp");
+			case "login":
+				requestDispatcher = request.getRequestDispatcher("./jsp/login.jsp");
+			
 				requestDispatcher.forward(request, response);
-				//gotoReg(request, response);
+				
 				break;
-
+			case "signup":
+				requestDispatcher = request.getRequestDispatcher("./jsp/signup.jsp");
+			
+				requestDispatcher.forward(request, response);
+				
+				break;
+			case "checkout":
+				requestDispatcher = request.getRequestDispatcher("./jsp/checkout.jsp");
+				
+				requestDispatcher.forward(request, response);
+				
+				break;
 			
 			
 		}
-		}else {
+		}else { // if first time visiting controller direct it to catalog
 			 requestDispatcher = request.getRequestDispatcher(url);
 
 				requestDispatcher.forward(request, response);
 				}
 	
-			
-//		RequestDispatcher requestDispatcher = request.getRequestDispatcher(url);
-//		//response.sendRedirect("./jsp/catalog.jsp");
-//		requestDispatcher.forward(request, response);
-	}
+}
 
-//	private void gotoReg(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		// TODO Auto-generated method stub
-//		String url = "./jsp/registration.jsp";
-//		RequestDispatcher requestDispatcher = request.getRequestDispatcher(url);
-//		requestDispatcher.forward(request, response);
-//		return;
-//	}
-//
-//	private void gotoCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		
-//		String url = "./jsp/cart.jsp";
-//		response.sendRedirect(url);
-//		
-//	}
+
 
 	private void findByBrand(HttpServletRequest request, HttpServletResponse response, String brand) {
 		// TODO Auto-generated method stub
 		try {
-			// calling DAO method to retrieve a list of all books 
+			// calling DAO method to retrieve a list of all products with requested brand
 			ProductDAO proDao = new ProductDAOImp();
 			
 			List<Product> productList = proDao.findProductsByBrand(brand);
@@ -181,7 +166,7 @@ public class ProductController extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		try {
-			// calling DAO method to retrieve a list of all books 
+			// calling DAO method to retrieve list of all Category
 			ProductDAO proDao = new ProductDAOImp();
 			
 			List<String> productList = proDao.findAllCategories();
@@ -195,7 +180,7 @@ public class ProductController extends HttpServlet {
 	private void sortProductsH_L(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		try {
-			// calling DAO method to retrieve a list of all books 
+			// calling DAO method to retrieve a list of all products sorted in desc.
 			ProductDAO proDao = new ProductDAOImp();
 			
 			List<Product> productList = proDao.sortProductsH_L();
@@ -209,7 +194,7 @@ public class ProductController extends HttpServlet {
 	private void sortProductsL_H(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		try {
-			// calling DAO method to retrieve a list of all books 
+			// calling DAO method to retrieve a list of all products sorted in asc.
 			ProductDAO proDao = new ProductDAOImp();
 			
 			List<Product> productList = proDao.sortProductsL_H();
@@ -223,7 +208,7 @@ public class ProductController extends HttpServlet {
 	private void findProductsByCategory(HttpServletRequest request, HttpServletResponse response, String category) {
 		// TODO Auto-generated method stub
 		try {
-			// calling DAO method to retrieve a list of all books 
+			// calling DAO method to retrieve of all products with requested Category
 			ProductDAO proDao = new ProductDAOImp();
 			
 			List<Product> productList = proDao.findProductsByCategory(category);
@@ -238,7 +223,7 @@ public class ProductController extends HttpServlet {
 	private void findAllProducts(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		try {
-			// calling DAO method to retrieve a list of all books 
+			// calling DAO method to retrieve a list of all products
 			ProductDAO proDao = new ProductDAOImp();
 			
 			List<Product> productList = proDao.findAllProducts();

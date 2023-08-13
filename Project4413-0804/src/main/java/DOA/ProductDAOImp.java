@@ -43,13 +43,7 @@ public class ProductDAOImp implements ProductDAO{
 		String sql = "select * from products;";
 Connection connection = null;
 		
-		try {
-			connection = getConnection();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+				
 		try {
 			connection = getConnection();
 			
@@ -268,12 +262,7 @@ public List<Product> findProductsByBrand(String br) {
 	
 	Connection connection = null;
 	
-	try {
-		connection = getConnection();
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace(); 
-	}
+	
 	
 	try {
 		connection = getConnection();
@@ -364,6 +353,32 @@ private List<Product> makeList(ResultSet rs){
 	}
 	return result;
 	
+}
+
+@Override
+public int findId(String name) {
+	// TODO Auto-generated method stub
+	int id=0;
+	
+	String sql = "select id from products where name like '"+name+"' ;";
+	
+	Connection connection = null;
+	
+	try {
+		connection = getConnection();
+		
+		PreparedStatement statement = connection.prepareStatement(sql);
+		ResultSet rs =  statement.executeQuery();
+	
+		id = rs.getInt("id");;
+		
+	} catch (SQLException ex) {
+		ex.printStackTrace();
+	} finally {
+		closeConnection(connection);
+	}
+	
+	return id;
 }
 
 

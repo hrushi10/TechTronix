@@ -30,10 +30,16 @@
             <label for="state">State</label>
             <input type="text" class="form-control" id="state" name="state" required>
         </div>
+        
+        <div class="form-group">
+            <label for="zip">Country</label>
+            <input type="text" class="form-control" id="zip" name="zip" required>
+        </div>
+        
         <div class="form-group">
             <label for="zip">ZIP Code</label>
             <input type="text" class="form-control" id="zip" name="zip" required>
-        </div>
+        </div> 
 
         <h3>Payment Information</h3>
         <div class="form-group">
@@ -52,10 +58,45 @@
             <label for="cvv">CVV</label>
             <input type="text" class="form-control" id="cvv" name="cvv" required>
         </div>
+        
+		 <input type="checkbox" id="billAddr" name="billAddr" value="billAddr" onclick="checkAddress(this)">
+  		<label for="billAddr"> Billing Address same as Shipping Address</label><br><br>
 
-        <button type="submit" class="btn btn-primary">Complete Purchase</button>
+			<div id="bill_Addr" >
+				<h3>Billing Address</h3>
+				<div class="form-group">
+					<label for="address">Address</label> <input type="text"
+						class="form-control" id="address" name="address" required>
+				</div>
+				<div class="form-group">
+					<label for="city">City</label> <input type="text"
+						class="form-control" id="city" name="city" required>
+				</div>
+				<div class="form-group">
+					<label for="state">State</label> <input type="text"
+						class="form-control" id="state" name="state" required>
+				</div>
+
+				<div class="form-group">
+					<label for="zip">Country</label> <input type="text"
+						class="form-control" id="zip" name="zip" required>
+				</div>
+
+				<div class="form-group">
+					<label for="zip">ZIP Code</label> <input type="text"
+						class="form-control" id="zip" name="zip" required>
+				</div>
+			</div>
+
+			<button type="submit" class="btn btn-primary">Complete Purchase</button>
     </form>
 </div>
+
+<script>
+
+
+
+</script>
 
 </body>
 </html>

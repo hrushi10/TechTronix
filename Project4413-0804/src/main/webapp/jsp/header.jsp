@@ -29,7 +29,7 @@
                         Account
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="./${initParam.param1}?action=reg">Login</a>
+                        <a class="dropdown-item" href="./${initParam.param1}?action=login">Login</a>
                         <a class="dropdown-item" href="#">Logout</a>
                     </div>
                 </div> &nbsp;

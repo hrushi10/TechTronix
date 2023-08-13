@@ -32,5 +32,5 @@ public interface ProductDAO {
 	
 	public  List<Product> sortProductsName();
 	
-	
+	public int findId(String name); 
 }
