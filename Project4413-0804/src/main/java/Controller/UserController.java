@@ -1,6 +1,7 @@
 package Controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -46,6 +47,9 @@ public class UserController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String errorMsg = " ";
+		request.setAttribute("error", errorMsg);
+		
 		UserDAOImpl userDAO = new UserDAOImpl();
 
 		String email = request.getParameter("loginEmail");
@@ -68,11 +72,15 @@ public class UserController extends HttpServlet {
 			if (user != null && user.getPassword().equals(password)) {
 				// Successful login, set user in session and redirect
 				request.getSession().setAttribute("user", user.getName());
+				request.getSession().setAttribute("userEmail",email);
+
 				requestDispatcher = request.getRequestDispatcher("./jsp/catalog.jsp");
 				requestDispatcher.forward(request, response);
 				System.out.println("user logged in");
-			} else {
-				// Failed login, redirect back to login page with error message
+			} else if(user != null && (user.getPassword() != password)){
+				// Failed login - wrong password but user exists
+				errorMsg = "Incorrect email/password entered.";
+				request.setAttribute("error", errorMsg);
 				requestDispatcher = request.getRequestDispatcher("./jsp/login.jsp");
 				requestDispatcher.forward(request, response);
 			}

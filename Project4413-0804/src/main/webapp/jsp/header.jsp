@@ -45,7 +45,7 @@
 						// User IS logged in. 
 					%>
 						<p class="dropdown-item">
-							<%= request.getSession().getAttribute("user") %>
+							Hello, <%= request.getSession().getAttribute("user") %>
 						</p> 
 						<a class="dropdown-item" href="./${initParam.param1}?action=logout">Logout</a>
 					<% } %>

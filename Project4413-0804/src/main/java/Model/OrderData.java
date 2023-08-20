@@ -9,6 +9,7 @@ public class OrderData {
     private String city;
     private String state;
     private String zip;
+    private String country;
     private String cardName;
     private String cardNumber;
     private String expiration;
@@ -19,14 +20,16 @@ public class OrderData {
     public OrderData() {}
 
     // Parameterized constructor
-    public OrderData(String customerName, String address, String city, String state, String zip, 
+    public OrderData(String customerName, String address, String city, String state, String country,String zip, 
                      String cardName, String cardNumber, String expiration, String cvv, 
                      List<CartItem> cartItems) {
+    	
         this.customerName = customerName;
         this.address = address;
         this.city = city;
         this.state = state;
         this.zip = zip;
+        this.country = country;
         this.cardName = cardName;
         this.cardNumber = cardNumber;
         this.expiration = expiration;
@@ -66,7 +69,14 @@ public class OrderData {
     public void setState(String state) {
         this.state = state;
     }
+    
+    public String getCountry() {
+        return country;
+    }
 
+    public void setCountry(String country) {
+        this.country = country;}
+    
     public String getZip() {
         return zip;
     }

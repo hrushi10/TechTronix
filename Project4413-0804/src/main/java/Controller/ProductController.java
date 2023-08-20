@@ -141,6 +141,12 @@ public class ProductController extends HttpServlet {
 				
 				break;
 				
+			case "processCheckout":
+				requestDispatcher = request.getRequestDispatcher("./ProcessCheckout");
+				
+				requestDispatcher.forward(request, response);
+				
+				break;
 			
 			
 		}

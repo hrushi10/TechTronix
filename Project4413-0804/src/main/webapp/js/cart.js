@@ -1,3 +1,6 @@
+
+// creating a cart object and storing items in cart for further use
+// this is not funny
 function addToCart(button) {
     var name = button.getAttribute('data-name');
     var price = parseFloat(button.getAttribute('data-price'));
@@ -16,6 +19,7 @@ function addToCart(button) {
     alert('Added to cart successfully!');
 }
 
+
 function updateCartItemQuantity(element, productName) {
     var newQuantity = parseInt(element.value);
     var cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -29,12 +33,16 @@ function updateCartItemQuantity(element, productName) {
     renderCart();
 }
 
+
+
 function renderCart() {
     var cart = JSON.parse(localStorage.getItem('cart')) || [];
-    var tbody = document.querySelector('tbody');
+    var tbody = document.querySelector('#cartTable  tbody');
     var total = 0;
 
     tbody.innerHTML = '';
+    
+    
 
     cart.forEach(function(item) {
         total += item.price * item.quantity;
@@ -91,19 +99,21 @@ function submitOrder(event) {
     var formData = new FormData(document.querySelector('form'));
     
     var orderData = {
-        customerName: formData.get('cardName'),
+        customerName: formData.get('fName')+" "+formData.get('lName'),
         address: formData.get('address'),
         city: formData.get('city'),
         state: formData.get('state'),
+        country: formData.get('country'),
         zip: formData.get('zip'),
+        cardName: formData.get('cardName'),
         cardNumber: formData.get('cardNumber'),
         expiration: formData.get('expiration'),
         cvv: formData.get('cvv'),
         cartItems: cart
     };
     console.log(orderData);
-    
-    fetch('/Project4413/ProcessCheckoutServlet', {
+      console.log("this is it");
+    fetch('./ProcessCheckout', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -131,16 +141,59 @@ function submitOrder(event) {
     });
 }
 
-function checkAddress(checkbox){
-	var div = document.getElementById('bill_Addr');
-	
-    if (!checkbox.checked)
-    {
-        div.style.display ='block';
-       
-    }else{
-    	 div.style.display ='none';
-    }
+
+
+function renderOrderSummary() {
+    var cart = JSON.parse(localStorage.getItem('cart')) || [];
+    var tbody = document.querySelector('#order-summary-checkout tbody');
+    var total = 0;
+    
+   
+
+    tbody.innerHTML = '';
+
+    cart.forEach(function(item) {
+        total += item.price * item.quantity;
+
+        var row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${item.name}</td>
+            <td>$${item.price.toFixed(2)}</td>
+            <td>${item.quantity}</td>
+            <td>$${(item.price * item.quantity).toFixed(2)}</td>
+        `;
+
+        tbody.appendChild(row);
+    });
+
+    document.querySelector('.order-total').innerText = "Total: $" + total.toFixed(2);
 }
 
-document.addEventListener('DOMContentLoaded', renderCart);
+
+document.addEventListener('DOMContentLoaded', function() {
+	 
+    if (window.location.href.includes('checkout')== true) {
+		
+        renderOrderSummary();
+    } else {
+        renderCart();
+    }
+});
+
+
+const cartData = localStorage.getItem('cart');
+const url = '/ProcessCheckout';
+
+fetch(url, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: cartData,
+})
+.then(response => response.json())
+.then(data => {
+  // Handle the response from the servlet if needed
+})
+
+

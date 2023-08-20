@@ -8,35 +8,47 @@
 <!-- Header for Catalog Page -->
 <jsp:include page="header.jsp" flush="true" />
 
+<!-- Sign Up Validation javascript file -->
+<script src="./js/userSignUpValidation.js"></script>
+
 <!-- End of Header -->
 </head>
 <body>
 
 	<div class="container my-5">
 		<div class="row">
-			<div class="col-lg-6">
-				<h3>Register</h3>
-				<form action="UserRegisterController" method="post">
+			<div class="centerRegister">
+				<%
+				if (request.getAttribute("registeredMsg3") != null) {
+				%>
+				<h6 style="color: red; text-align: center;"><%=request.getAttribute("registeredMsg3")%></h6>
+				<%
+				}
+				%>
+				<h3 style="text-align: center;">Register</h3>
+				<form name="signupForm" action="UserRegisterController"
+					onsubmit="return signupValidate()" method="post">
 					<div class="form-group">
 						<label for="registerName">Name</label> <input type="text"
 							class="form-control" id="registerName" name="registerName"
-							required>
+							style="width: 300px;">
 					</div>
 					<div class="form-group">
-						<label for="registerEmail">Email</label> <input type="email"
+						<label for="registerEmail">Email</label> <input type="text"
 							class="form-control" id="registerEmail" name="registerEmail"
-							required>
+							style="width: 300px;">
 					</div>
 					<div class="form-group">
 						<label for="registerPassword">Password</label> <input
 							type="password" class="form-control" id="registerPassword"
-							name="registerPassword" required>
+							name="registerPassword" style="width: 300px;">
 					</div>
 					<button type="submit" class="btn btn-success">Register</button>
 				</form>
 				<br> <br>
 				<p>
-					Already registered? Click <a href="login.jsp">here</a> to login.
+					Already registered? Click <a
+						href="./${initParam.param1}?action=login">here</a> to login.
 				</p>
 			</div>
 		</div>

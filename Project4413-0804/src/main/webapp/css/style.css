@@ -23,7 +23,9 @@ navbar-nav{
     font-size: 18px;
 }
 													/* End of Header for Catalog */
-
+.btn{
+	    padding: 0.4rem 0.5rem !important;
+}
 
 												/* Sort/Filter Section for Catalog */
 .sort-btn, .filter-btn {
@@ -48,9 +50,14 @@ navbar-nav{
 
 
 .add-to-cart-btn {
-    width: 100%;
+    width: auto;
 }
 											
+.btn {
+	display: flex;
+}
+
+
 											
 										/* End Products Section for Catalog */
 											
@@ -90,3 +97,18 @@ table th {
 											
 											/* End of Cart Page*/
 											
+
+												/* Login Page */
+.centerLogin {
+  margin: auto;
+  border: 3px solid #007bff;
+  padding: 40px;
+  padding-top: 20px;
+}
+
+.centerRegister {
+  margin: auto;
+  border: 3px solid #73AD21;
+  padding: 40px;
+  padding-top: 20px;
+}											

@@ -12,7 +12,7 @@
 <body>
     <div class="container my-5">
         <h1 class="text-center mb-4">Shopping Cart</h1>
-        <table class="table table-striped">
+        <table class="table table-striped" id="cartTable">
             <thead>
                 <tr>
                     <th>Product Name</th>
