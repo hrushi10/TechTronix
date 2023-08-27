@@ -59,7 +59,9 @@ public class UserController extends HttpServlet {
 
 		if (existingUser == null) {
 			// User doesn't exist, redirect to registration page
-			requestDispatcher = request.getRequestDispatcher("./jsp/signup.jsp");
+			String msg = "Not an existing user. Register.";
+            request.setAttribute("msgError", msg);            
+            requestDispatcher = request.getRequestDispatcher("./jsp/login.jsp");
 			requestDispatcher.forward(request, response);
 
 		} else {

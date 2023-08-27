@@ -26,6 +26,15 @@
 				}
 				%>
 				<%
+                if ((request.getAttribute("msgError") != null)) {
+                %>
+				<h6 style="color: red; text-align: center;"><%=request.getAttribute("msgError")%></h6>
+				<%
+                }
+                %>				
+				
+				
+				<%
 				if (request.getAttribute("registeredMsg") != null) {
 				%>
 				<h6 style="color: green; text-align: center;"><%=request.getAttribute("registeredMsg1")%></h6>
