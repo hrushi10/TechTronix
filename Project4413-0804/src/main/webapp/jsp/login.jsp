@@ -13,7 +13,7 @@
 
 <!-- End of Header -->
 </head>
-<body>
+<body style="background-color: darkgrey;">
 
 	<div class="container my-5">
 		<div class="row">

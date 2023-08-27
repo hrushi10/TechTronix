@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DOA.UserDAO;
-import DOA.UserDAOImpl;
+import DAO.UserDAO;
+import DAO.UserDAOImpl;
 import Model.User;
 
 /**
@@ -71,12 +71,26 @@ public class UserController extends HttpServlet {
 
 			if (user != null && user.getPassword().equals(password)) {
 				// Successful login, set user in session and redirect
+				
 				request.getSession().setAttribute("user", user.getName());
 				request.getSession().setAttribute("userEmail",email);
-
-				requestDispatcher = request.getRequestDispatcher("./jsp/catalog.jsp");
+				
+				if(user.getAdmin()) {
+					request.getSession().setAttribute("admin", "admin");
+					requestDispatcher = request.getRequestDispatcher("./products?action=analytics");
+					requestDispatcher.forward(request, response);
+					
+//					response.sendRedirect("./products?action=analytics");
+					
+					System.out.println("admin logged in");
+				}else {
+					requestDispatcher = request.getRequestDispatcher("./jsp/catalog.jsp");
 				requestDispatcher.forward(request, response);
 				System.out.println("user logged in");
+				}
+
+				
+				
 			} else if(user != null && (user.getPassword() != password)){
 				// Failed login - wrong password but user exists
 				errorMsg = "Incorrect email/password entered.";

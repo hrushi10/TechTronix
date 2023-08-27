@@ -51,9 +51,6 @@ public class ProcessCheckoutServlet extends HttpServlet  {
         
         double totalCost = 0.0; // Initialize the total cost
         
-        for (CartItem item : order.getCartItems()) {
-            totalCost += item.getPrice() * item.getQuantity();
-        }
         
         if (order == null) {
             try (PrintWriter out = response.getWriter()) {
@@ -65,7 +62,11 @@ public class ProcessCheckoutServlet extends HttpServlet  {
                 out.print("{\"message\":\"Order not processed. Customer name is missing.\"}");
             }
             return;
-        } else {
+        } else  if(order.getCartItems() == null){
+        	System.out.println("No items in cart");
+        	
+        	 return;
+        }  else{
             try (PrintWriter out = response.getWriter()) {
                 out.print("{\"message\":\"Order processed successfully for: " + order.getCustomerName() + "\"}");
             }
@@ -73,18 +74,21 @@ public class ProcessCheckoutServlet extends HttpServlet  {
 
         Connection con = null;
         
+        
+
+        for (CartItem item : order.getCartItems()) {
+            totalCost += item.getPrice() * item.getQuantity();
+        }
+        
        String userName = (String) request.getSession().getAttribute("userEmail");
-       
-       
-       
-       System.out.println(userName);
+      
            
         try {
             con = connectToDatabase();
 
             String insertAddress = "INSERT INTO address (user, address, city, state, country, zip) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement stmtAddress = con.prepareStatement(insertAddress, Statement.RETURN_GENERATED_KEYS);
- System.out.println("this is carfd numebr"+order.getCardNumber());
+ 
             stmtAddress.setString(1, userName);
             stmtAddress.setString(2, order.getAddress());
             stmtAddress.setString(3, order.getCity());
@@ -106,15 +110,23 @@ public class ProcessCheckoutServlet extends HttpServlet  {
             
             
             	for (CartItem item : order.getCartItems()) {
+            		
+            		if(itemList!="") {
+            			itemList = itemList + ","+item.getName();
+                    	qtyList = qtyList + ","+ item.getQuantity();
+                    	priceList = priceList + ","+ item.getPrice();
+            		}else {
+            			itemList = item.getName();
+                    	qtyList = ""+item.getQuantity();
+                    	priceList = ""+item.getPrice();
+            		}
             	
-            	itemList = itemList + " "+item.getName();
-            	qtyList = qtyList + " "+ item.getQuantity();
-            	priceList = priceList + " "+ item.getPrice();
+            
 
             }
 
             
-            String insertOrder = "INSERT INTO orderDetails (itemList, qtyList, total, date, priceList) VALUES (?, ?, ?, now(), ?)";
+            String insertOrder = "INSERT INTO orderDetails (itemList, qtyList, total, priceList) VALUES (?, ?, ?, ?)";
 
             PreparedStatement stmtOrder = con.prepareStatement(insertOrder, Statement.RETURN_GENERATED_KEYS);
 
@@ -151,9 +163,9 @@ public class ProcessCheckoutServlet extends HttpServlet  {
             	lastPayId = ip.getInt(1);
             }
             
-            String makeOrder= "INSERT INTO Orders (orderId, user, addressId, payId) VALUES ( ?, ?, ?, ?)";
+            String makeOrder= "INSERT INTO Orders (orderId, user, addressId, payId, date) VALUES ( ?, ?, ?, ?, now())";
             
-            System.out.println("orderId "+ lastOrderId+" lastAddress "+lastAddressId+" laypayId "+lastPayId);
+         //   System.out.println("orderId "+ lastOrderId+" lastAddress "+lastAddressId+" laypayId "+lastPayId);
             // 12,10,4
             PreparedStatement stmtMerger = con.prepareStatement(makeOrder, Statement.RETURN_GENERATED_KEYS);
             

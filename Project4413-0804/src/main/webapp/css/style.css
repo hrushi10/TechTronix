@@ -1,9 +1,4 @@
-													/* Catalog Page*/
-
-												/* Header for Catalog */
-.navbar {
-    border-bottom: 1px solid #e1e1e1;
-}
+											/* Header for Catalog */
 navbar-brand{
 	margin:auto;
 }
@@ -12,7 +7,8 @@ navbar-nav{
 }
 
 .logo {
-    height: 100px !important;
+    height: 120px !important;
+    margin-left: 160px
 }
 
 .btn-outline-secondary {
@@ -21,6 +17,11 @@ navbar-nav{
 
 .cart-btn i {
     font-size: 18px;
+}
+
+.dropdown-toggle{
+	white-space: nowrap;
+    font-size: larger;
 }
 													/* End of Header for Catalog */
 .btn{
@@ -32,15 +33,15 @@ navbar-nav{
     cursor: pointer;
 }
 
-.list-group-item.bg-light {
-    background-color: #f8f9fa !important;
+.list-group-item {
+    background-color: darkgray !important;
+    color: black;
     font-weight: bold;
 }
+
 													/* END of Sort/Filter Section for Catalog */
 												
-												
 												/* Products Section for Catalog */
-
 
 											
 .product-card {
@@ -51,14 +52,68 @@ navbar-nav{
 
 .add-to-cart-btn {
     width: auto;
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
 }
 											
 .btn {
 	display: flex;
 }
 
+/* Card Animation - W3Schools */
 
-											
+
+.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 300px;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 1.0s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+     background-color: lightgray;
+    color: black;
+    border-radius: 15px;
+    border-style: solid;
+    border-width: medium;
+}
+
+.flip-card-back {
+    background-color: lightgray;
+    color: black;
+    transform: rotateY(180deg);
+    border-radius: 15px;
+    border-style: dotted;
+}
+
+.item-description{
+	margin: 70px;
+}
+								
 										/* End Products Section for Catalog */
 											
 											
@@ -66,19 +121,11 @@ navbar-nav{
 											/* Cart Page */
 											
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-table th, table td {
-    padding: 10px;
-    border: 1px solid #ddd;
-}
-
-table th {
-    background-color: #f2f2f2;
-    text-align: left;
+table, th, td, tr {
+  border: 3px solid black;
+  background-color: white;
+  text-align: center;
+  padding: 10px;
 }
 
 .btn-danger {
@@ -100,6 +147,7 @@ table th {
 
 												/* Login Page */
 .centerLogin {
+	background-color: white;
   margin: auto;
   border: 3px solid #007bff;
   padding: 40px;
@@ -107,8 +155,9 @@ table th {
 }
 
 .centerRegister {
+	background-color: white;
   margin: auto;
   border: 3px solid #73AD21;
   padding: 40px;
   padding-top: 20px;
-}											
+}					

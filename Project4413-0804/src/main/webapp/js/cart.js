@@ -1,12 +1,15 @@
 
-// creating a cart object and storing items in cart for further use
-// this is not funny
 function addToCart(button) {
+	
+	
     var name = button.getAttribute('data-name');
     var price = parseFloat(button.getAttribute('data-price'));
     var quantity = parseInt(button.getAttribute('data-quantity') || 1); // set to 1 if not provided
 
+
+
     var cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
 
     var existingItem = cart.find(item => item.name === name);
     if (existingItem) {
@@ -36,14 +39,18 @@ function updateCartItemQuantity(element, productName) {
 
 
 function renderCart() {
+	
+	
+	
     var cart = JSON.parse(localStorage.getItem('cart')) || [];
     var tbody = document.querySelector('#cartTable  tbody');
     var total = 0;
 
     tbody.innerHTML = '';
     
+    var  button = document.getElementById('cart_btn');
     
-
+   
     cart.forEach(function(item) {
         total += item.price * item.quantity;
 
@@ -58,6 +65,12 @@ function renderCart() {
 
         tbody.appendChild(row);
     });
+    
+     if(total == 0){
+		button.disabled = true;
+	}else{
+		button.disabled = false;
+	}
 
     document.querySelector('.text-right h3').innerText = "Total: $" + total.toFixed(2);
 }
@@ -97,7 +110,11 @@ function submitOrder(event) {
     }
     var cart = JSON.parse(localStorage.getItem('cart')) || [];
     var formData = new FormData(document.querySelector('form'));
-    
+   
+   
+    console.log(cart == null);
+   
+   
     var orderData = {
         customerName: formData.get('fName')+" "+formData.get('lName'),
         address: formData.get('address'),
@@ -111,8 +128,12 @@ function submitOrder(event) {
         cvv: formData.get('cvv'),
         cartItems: cart
     };
+   
+   
     console.log(orderData);
       console.log("this is it");
+   
+   
     fetch('./ProcessCheckout', {
         method: 'POST',
         headers: {
@@ -196,4 +217,6 @@ fetch(url, {
   // Handle the response from the servlet if needed
 })
 
-
+function goToCheckout(){
+	window.location.href = "./products?action=checkout";
+}

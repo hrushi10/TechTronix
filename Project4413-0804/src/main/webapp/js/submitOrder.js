@@ -26,6 +26,12 @@ function submitOrder(event) {
     var cart = JSON.parse(localStorage.getItem('cart')) || [];
     var formData = new FormData(document.querySelector('form'));
     
+    if(cart == null){
+		
+		alert('The Cart is empty !! ');
+	}
+    
+    
     var orderData = {
         customerName: formData.get('fName')+" "+formData.get('lName'),
         address: formData.get('address'),
@@ -58,7 +64,7 @@ function submitOrder(event) {
         // Handle the success response here
         if (data.message && data.message.includes("Order processed successfully")) {
             localStorage.removeItem('cart');  // Clear the cart after successful order processing
-            window.location.href = 'thankyou.jsp?name=' + encodeURIComponent(orderData.customerName);
+            window.location.href = './products?action=thankyou'; 
         } else {
             // If there's an error message from the server
             alert(data.message || 'Order processing failed. Please try again.');
@@ -68,3 +74,4 @@ function submitOrder(event) {
         alert('There was an error: ' + error);
     });
 }
+

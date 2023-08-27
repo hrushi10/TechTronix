@@ -1,8 +1,7 @@
 
 <head>
 <link rel="stylesheet" href="./css/style.css" type="text/css" />
-<script src="../js/sort.js"></script>
-<script src="../js/filter.js"></script>
+
 <script src="./js/cart.js"></script>
 
 <link rel="stylesheet"
@@ -24,15 +23,15 @@
 
 
 <!-- Header for Catalog Page -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: black;">
 	<div class="container-fluid justify-content-center">
 		<a class="navbar-brand mx-auto" href="./products"> <img
 			src="./images/logo.png" alt="Logo" class="logo">
 		</a>
 		<div class="navbar-nav">
 			<div class="dropdown">
-				<button class="btn btn-outline-secondary dropdown-toggle"
-					type="button" id="dropdownMenuButton" data-toggle="dropdown"
+				<button class="btn btn-warning dropdown-toggle"
+					style="font-size:larger;" type="button" id="dropdownMenuButton" data-toggle="dropdown"
 					aria-haspopup="true" aria-expanded="false">Account</button>
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 					<%
@@ -47,12 +46,19 @@
 						<p class="dropdown-item">
 							Hello, <%= request.getSession().getAttribute("user") %>
 						</p> 
+						
+						<%	
+					 if("admin".equals(request.getSession().getAttribute("admin"))) {
+						// User IS logged in.%>
+					<a class="dropdown-item" href="./${initParam.param1}?action=analytics">Analytics</a>
+
+						<% } %>
 						<a class="dropdown-item" href="./${initParam.param1}?action=logout">Logout</a>
-					<% } %>
+					<%} %>
 				</div>
 			</div>
-			&nbsp; <a href="./${initParam.param1}?action=cart"><button
-					class="btn btn-outline-secondary cart-btn">
+			&nbsp; &nbsp; <a href="./${initParam.param1}?action=cart"><button
+					class="btn btn-warning cart-btn" style="font-size:larger;" >
 					<!--  href="./jsp/cart.jsp"><button class="btn btn-outline-secondary cart-btn" -->
 					<i class="fas fa-shopping-cart"></i>
 				</button> </a>

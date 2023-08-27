@@ -9,7 +9,7 @@
     <!-- End of Header -->
  
 </head>
-<body>
+<body style="background-color: darkgrey;">
     <div class="container my-5">
         <h1 class="text-center mb-4">Shopping Cart</h1>
         <table class="table table-striped" id="cartTable">
@@ -28,7 +28,7 @@
         </table>
         <div class="text-right">
             <h3>Total: $</h3>
-            <a href="./${initParam.param1}?action=checkout" class="btn btn-success">Proceed to Checkout</a>
+             <button class="btn btn-success" id="cart_btn" onclick="goToCheckout()"> Proceed to Checkout</button>
         </div>
     </div>
 </body>

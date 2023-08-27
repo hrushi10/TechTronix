@@ -1,8 +1,10 @@
 package Controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
+import javax.naming.Context;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -11,9 +13,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import DOA.ProductDAO;
-import DOA.ProductDAOImp;
+import DAO.ProductDAO;
+import DAO.ProductDAOImp;
 import Model.Product;
 
 
@@ -48,6 +51,8 @@ public class ProductController extends HttpServlet {
 		context.setAttribute("productList", productList);
 		context.setAttribute("categoryList", categoryList);
 		context.setAttribute("brandList", brandList);
+		int countCheck = 1000; 
+		context.setAttribute("countCheck", countCheck);
 	}
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -73,11 +78,20 @@ public class ProductController extends HttpServlet {
 			switch (action) {
 			case "allproducts":
 				findAllProducts(request, response);
-		
+				 requestDispatcher = request.getRequestDispatcher(url);
+
+					requestDispatcher.forward(request, response);
 				break;
 				
 			case "category":
 				findProductsByCategory(request, response, category);
+				
+				 requestDispatcher = request.getRequestDispatcher(url);
+
+				requestDispatcher.forward(request, response);
+				break;
+			case "sortName":
+				sortProductsName(request, response, category);
 				
 				 requestDispatcher = request.getRequestDispatcher(url);
 
@@ -147,18 +161,69 @@ public class ProductController extends HttpServlet {
 				requestDispatcher.forward(request, response);
 				
 				break;
+				
+			case "analytics":
+				requestDispatcher = request.getRequestDispatcher("./AdminViewController");
+				
+				requestDispatcher.forward(request, response);
+				
+				break;
+			case "thankyou":
+                requestDispatcher = request.getRequestDispatcher("./jsp/thankyou.jsp");
+                
+                requestDispatcher.forward(request, response);
+                
+                break;
 			
+				
 			
 		}
 		}else { // if first time visiting controller direct it to catalog
-			 requestDispatcher = request.getRequestDispatcher(url);
-
-				requestDispatcher.forward(request, response);
+			 
+			requestDispatcher = request.getRequestDispatcher(url);
+			requestDispatcher.forward(request, response);
+			
+//			int x =	(int) request.getSession().getServletContext().getAttribute("countCheck");
+//			
+//			System.out.println("this is x "+x);
+//			if(x == 0) {
+//				PrintWriter out = response.getWriter();
+//
+//		        // Embed JavaScript code in the response
+//		       
+//		        out.println("<script>");
+//		        out.println("localStorage.removeItem('cart')");
+//		        out.println("console.log('this is console in clear script')");
+//		        out.println("</script>");
+//		     out.close();
+//		     
+//		     x++;
+//			}
+			
+			
+			
+			
+		//	request.getSession().getServletContext().setAttribute("countCheck", x);
+			
 				}
 	
 }
 
 
+
+	private void sortProductsName(HttpServletRequest request, HttpServletResponse response, String category) {
+		// TODO Auto-generated method stub
+		try {
+			// calling DAO method to retrieve list of all Category
+			ProductDAO proDao = new ProductDAOImp();
+			
+			List<Product> productList = proDao.sortProductsName();
+			request.setAttribute("productList", productList);
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
 
 	private void findByBrand(HttpServletRequest request, HttpServletResponse response, String brand) {
 		// TODO Auto-generated method stub
